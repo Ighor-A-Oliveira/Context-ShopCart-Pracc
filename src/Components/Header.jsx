@@ -9,10 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
 
-  const {
-    state: { cart },
-    dispatch,
-  } = useCart();
+  const {state: {cart}, dispatch, calculateTotal} = useCart()
 
   const isCartEmpty = cart.length === 0;
 
@@ -70,12 +67,10 @@ export default function Header() {
                     <AiFillDelete
                       fontSize="20px"
                       className="cursor-pointer ml-2"
-                      onClick={() =>
-                        dispatch({
-                          type: "REMOVE_FROM_CART",
-                          payload: prod,
-                        })
-                      }
+                      onClick={() =>{
+                        dispatch({type: "REMOVE_FROM_CART",payload: prod})
+                        calculateTotal(cart)
+                      }}
                     />
                   </span>
                 ))}

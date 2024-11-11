@@ -8,13 +8,9 @@ export default function Card({ prod }) {  // Destructure 'prod' directly from pr
   const emptyStars = 5 - parseInt(data.ratings);
   
   //Yes, My context Varible is name CartContext, but in here we are using cart
-  //This is because the cart reducer declared cart as part of the state, so we can access it here
+  //This is because the cart context declared cart as part of the state, so we can access it here
   const {state: {cart}, dispatch} = useCart()
 
-  
-
-  console.log("STATE:" +cart)
-  console.log(cart)
 
   return (
     <div className='w-[435px] card flex flex-col my-[10px]'>
@@ -43,7 +39,10 @@ export default function Card({ prod }) {  // Destructure 'prod' directly from pr
                   Remove From Cart
               </button>) 
               : 
-              (<button onClick={ () => {dispatch({type:'ADD_TO_CART', payload: prod})}}
+              (<button onClick={ () => {
+                dispatch({type:'ADD_TO_CART', payload: prod}) 
+              }
+              }
                 className='px-2 py-4 mb-[25px] bg-blue-600 hover:bg-blue-900 cursor-pointer text-white w-[120px] rounded-md text-center' 
                 disabled={data.inStock <= 0}>
                   {!data.inStock ? "Out of Stock" : "Add to Cart"}
